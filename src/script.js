@@ -27,15 +27,21 @@ const setupCanvas = (canvas) => {
   canvas.style.height = h + 'px';
 
   context.scale(dpi, dpi);
-  context.strokeStyle = 'red';
+  context.fillStyle = '#000000';
+  context.strokeStyle = '#ffffff';
   context.lineWidth = 80;
   context.lineCap = 'round';
   context.lineJoin = 'round';
+
+  context.rect(0, 0, w, h);
+  context.fill()
 }
 
 const startToDraw = (canvas, x, y) => {
   const context = canvas.getContext('2d');
+
   context.moveTo(x, y); 
+  context.beginPath();
 }
 
 const moveDraw = (canvas, x, y) => {
