@@ -81,3 +81,8 @@ document.addEventListener('mousemove', (e) => {
   moveDraw(canvasIn, e.pageX, e.pageY);
   moveDraw(canvasOut, e.pageX, e.pageY);
 });
+
+window.addEventListener('resize', () => {
+  setupCanvas(canvasIn);
+  setupCanvas(canvasOut);
+});
