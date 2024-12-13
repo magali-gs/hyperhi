@@ -41,6 +41,9 @@ const setupCanvas = (canvas) => {
     context.lineCap = 'round';
     context.lineJoin = 'round';
 
+    context.shadowBlur = 10;
+    context.shadowColor = context.strokeStyle;
+
   context.rect(0, 0, w, h);
   context.fill()
 }
