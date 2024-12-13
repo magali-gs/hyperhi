@@ -1,5 +1,6 @@
 const cursor = document.querySelector('.cursor');
-const canvasTag = document.querySelector('canvas.in');
+const canvasIn= document.querySelector('canvas.in');
+const canvasOut= document.querySelector('canvas.out');
 let isMouseDown = false;
 
 const growCursor = () => {
@@ -27,11 +28,18 @@ const setupCanvas = (canvas) => {
   canvas.style.height = h + 'px';
 
   context.scale(dpi, dpi);
-  context.fillStyle = '#000000';
-  context.strokeStyle = '#ffffff';
-  context.lineWidth = 80;
-  context.lineCap = 'round';
-  context.lineJoin = 'round';
+
+  if (canvas.classList.contains('in')) {
+    context.fillStyle = '#000000';
+    context.strokeStyle = '#ffffff';
+  } else {    
+    context.fillStyle = '#ffffff';
+    context.strokeStyle = '#000000';
+  }
+
+    context.lineWidth = 80;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
 
   context.rect(0, 0, w, h);
   context.fill()
@@ -52,13 +60,15 @@ const moveDraw = (canvas, x, y) => {
   }
 }
 
-setupCanvas(canvasTag);
+setupCanvas(canvasIn);
+setupCanvas(canvasOut);
 
 document.addEventListener('mousedown', (e) => { 
   isMouseDown = true;
   
   growCursor();
-  startToDraw(canvasTag, e.pageX, e.pageY);
+  startToDraw(canvasIn, e.pageX, e.pageY);
+  startToDraw(canvasOut, e.pageX, e.pageY);
 });
 
 document.addEventListener('mouseup', () => {
@@ -68,5 +78,6 @@ document.addEventListener('mouseup', () => {
 
 document.addEventListener('mousemove', (e) => {
   moveCursor(e.pageX, e.pageY);
-  moveDraw(canvasTag, e.pageX, e.pageY);
+  moveDraw(canvasIn, e.pageX, e.pageY);
+  moveDraw(canvasOut, e.pageX, e.pageY);
 });
